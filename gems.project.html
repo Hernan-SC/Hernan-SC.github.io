@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMS Project | Hernán Salinas Castro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a2a3a;
+            --accent: #00d4ff;
+            --text: #2d3436;
+            --bg-light: rgba(255, 255, 255, 0.98);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--text);
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://www.universetoday.com/article_images/nrao21ao24a.jpg'); 
+            background-attachment: fixed;
+            background-size: cover;
+            line-height: 1.8;
+        }
+
+        .nav-back {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-back a:hover { color: var(--accent); }
+
+        .container { max-width: 900px; margin: 20px auto 60px; padding: 0 20px; }
+
+        section {
+            background: var(--bg-light);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        h1 { color: var(--primary); font-size: 2.2rem; margin-top: 0; line-height: 1.2; }
+        h2 { color: var(--primary); font-size: 1.5rem; margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        .project-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Contenedor de Imágenes Científicas */
+        .science-fig {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .science-fig img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        footer { text-align: center; color: white; padding: 20px; opacity: 0.7; }
+
+        @media (max-width: 600px) { section { padding: 25px; } h1 { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="nav-back">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+
+    <div class="container">
+        <section>
+            <h1>Gaseous Planets around M-dwarf stars (GEMS)</h1>
+            
+            <div class="project-meta">
+                <span class="badge"><i class="fas fa-satellite"></i> TESS Data</span>
+                <span class="badge"><i class="fas fa-microscope"></i> Transit Photometry</span>
+                <span class="badge"><i class="fas fa-star"></i> M-Dwarfs</span>
+            </div>
+
+            <p>
+                The <strong>GEMS project</strong> aims to address one of the most intriguing questions in modern exoplanet science: 
+                How do gas giant planets form around low-mass stars? Historically, core accretion models predicted that 
+                M-dwarfs shouldn't frequently host Jovian planets, yet surveys like GEMS are finding fascinating exceptions.
+            </p>
+
+            <div class="science-fig">
+                <img src="https://via.placeholder.com/800x400/f0f0f0/999999?text=Light+Curve+or+Transit+Diagram+Here" alt="Transit Light Curve">
+                <div class="caption">Figure 1: Example of a transit light curve from a candidate in the GEMS survey.</div>
+            </div>
+
+            <h2>Research Goals</h2>
+            <ul>
+                <li><strong>Detection & Confirmation:</strong> Identifying new gas giants using TESS photometry and confirming them via ground-based facilities like SPECULOOS and LCOGT.</li>
+                <li><strong>Statistical Census:</strong> Building a robust sample to determine the occurrence rate of giants around small stars.</li>
+                <li><strong>Evolutionary Tracks:</strong> Studying the migration patterns and atmospheric potential of these systems.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Key Methodology:</strong> We utilize high-precision radial velocity data from instruments like 
+                <strong>HARPS</strong> to break the mass-radius degeneracy and confirm the planetary nature of our candidates.
+            </div>
+
+            <h2>Current Progress</h2>
+            <p>
+                During my doctoral research, I have been focused on [Escribe aquí un avance específico, por ejemplo: 
+                analyzing 15 new candidates from the southern hemisphere]. Preliminary results suggest that 
+                [añade una conclusión breve o hallazgo].
+            </p>
+
+            <div class="science-fig">
+                <img src="https://via.placeholder.com/800x400/f0f0f0/999999?text=Mass-Radius+Relationship+Plot" alt="Mass-Radius Plot">
+                <div class="caption">Figure 2: Mass-radius relationship for known planets orbiting M-dwarfs.</div>
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Hernán Salinas Castro.
+    </footer>
+
+</body>
+</html>
