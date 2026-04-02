@@ -1,53 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Scientist</title>
+    <title>Nombre Apellido | Perfil Científico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary: #1a2a3a; /* Azul oscuro profundo */
+            --accent: #00d4ff;  /* Cian brillante para detalles */
+            --text: #2d3436;
+            --bg-light: rgba(255, 255, 255, 0.95);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            color: var(--text);
+            /* IMAGEN DE FONDO */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=2070'); 
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
         }
+
         header {
-            background: #333;
-            color: #fff;
-            padding: 20px;
+            padding: 80px 20px;
             text-align: center;
+            color: white;
         }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        header p { 
+            font-size: 1.4rem; 
+            font-weight: 300;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
         section {
-            padding: 20px;
-            margin: 20px;
-            background: #fff;
-            border-radius: 5px;
+            background: var(--bg-light);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px); /* Efecto cristal esmerilado */
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        .pub-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pub-item {
+            background: #f1f7ff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .pub-item:hover {
+            transform: translateX(10px);
+            background: #e6f0ff;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .social-links {
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            section { padding: 25px; }
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Your Name</h1>
-        <h2>Scientist</h2>
+        <h1>Tu Nombre Apellido</h1>
+        <p>Científico de Datos | Investigador en Biotecnología</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/tu-usuario" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://scholar.google.com/" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+        </div>
     </header>
-    <section>
-        <h3>About Me</h3>
-        <p>Brief bio about yourself.</p>
-    </section>
-    <section>
-        <h3>Research Interests</h3>
-        <p>Describe your research areas.</p>
-    </section>
-    <section>
-        <h3>Publications</h3>
-        <ul>
-            <li><a href="#">Publication Title 1</a></li>
-            <li><a href="#">Publication Title 2</a></li>
-        </ul>
-    </section>
-    <section>
-        <h3>Contact</h3>
-        <p>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-    </section>
+
+    <div class="container">
+        <section id="about">
+            <h3>Sobre Mí</h3>
+            <p>Escribe aquí una descripción profesional sobre tu formación y tus objetivos actuales. Puedes mencionar tus metodologías favoritas o las preguntas científicas que intentas resolver.</p>
+        </section>
+
+        <section id="research">
+            <h3>Áreas de Investigación</h3>
+            <p>Describe los temas principales en los que trabajas:</p>
+            <ul>
+                <li><strong>Tema 1:</strong> Descripción breve de la relevancia.</li>
+                <li><strong>Tema 2:</strong> Detalles sobre tu enfoque técnico.</li>
+            </ul>
+        </section>
+
+        <section id="publications">
+            <h3>Publicaciones Seleccionadas</h3>
+            <div class="pub-list">
+                <div class="pub-item">
+                    <strong>Análisis avanzado de partículas moleculares</strong><br>
+                    Revista de Ciencia Aplicada, 2025.
+                </div>
+                <div class="pub-item">
+                    <strong>Modelado predictivo en entornos controlados</strong><br>
+                    Simposio Internacional de Investigación, 2024.
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h3>Hablemos</h3>
+            <p>Estoy abierto a colaboraciones académicas y proyectos de investigación.</p>
+            <a href="mailto:tu-email@correo.com" class="contact-btn">
+                <i class="fas fa-envelope"></i> Enviar Correo
+            </a>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Tu Nombre Apellido. Todos los derechos reservados.
+    </footer>
+
 </body>
 </html>
