@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hernán Salinas Castro</title>
+    <title>Hernán Salinas Castro | PhD Student in Astrophysics</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #1a2a3a; /* Azul oscuro profundo */
-            --accent: #00d4ff;  /* Cian brillante para detalles */
+            --primary: #1a2a3a;
+            --accent: #00d4ff;
             --text: #2d3436;
             --bg-light: rgba(255, 255, 255, 0.95);
         }
@@ -19,111 +19,106 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             color: var(--text);
-            /* IMAGEN DE FONDO */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('https://www.universetoday.com/article_images/nrao21ao24a.jpg'); 
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
+            line-height: 1.7;
         }
 
         header {
-            padding: 80px 20px;
+            padding: 100px 20px 60px;
             text-align: center;
             color: white;
         }
 
-        header h1 { 
-            margin: 0; 
-            font-size: 3rem; 
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
+        header h1 { margin: 0; font-size: 3.2rem; letter-spacing: -1px; }
+        header p { font-size: 1.3rem; font-weight: 300; opacity: 0.9; margin-top: 10px; }
 
-        header p { 
-            font-size: 1.4rem; 
-            font-weight: 300;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
-        }
+        .container { max-width: 800px; margin: 0 auto 50px; padding: 0 20px; }
 
         section {
             background: var(--bg-light);
-            padding: 40px;
+            padding: 45px;
             margin-bottom: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px); /* Efecto cristal esmerilado */
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         h3 {
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             border-left: 5px solid var(--accent);
             padding-left: 15px;
-            margin-top: 0;
+            margin-bottom: 25px;
         }
 
-        .pub-list {
-            list-style: none;
-            padding: 0;
+        /* Mejora en About Me */
+        #about p {
+            text-align: justify;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
         }
 
-        .pub-item {
-            background: #f1f7ff;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .pub-item:hover {
-            transform: translateX(10px);
-            background: #e6f0ff;
-        }
-
-        .contact-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white !important;
-            padding: 12px 25px;
-            border-radius: 50px;
+        /* Estilo para Research Areas */
+        .research-link {
+            display: block;
             text-decoration: none;
+            color: inherit;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: white;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .research-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .research-link strong { color: var(--primary); display: block; margin-bottom: 5px; font-size: 1.1rem; }
+        .research-link span { font-size: 0.95rem; color: #555; }
+        .research-link i { float: right; color: var(--accent); margin-top: 5px; }
+
+        /* Formulario de Contacto */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
             font-weight: 600;
-            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .social-links {
-            margin-top: 25px;
-        }
+        .submit-btn:hover { background: #2c3e50; }
 
-        .social-links a {
-            color: white;
-            font-size: 2rem;
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
+        .social-links { margin-top: 25px; }
+        .social-links a { color: white; font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); }
 
-        .social-links a:hover {
-            color: var(--accent);
-        }
+        footer { text-align: center; color: white; padding: 40px; opacity: 0.8; }
 
-        footer {
-            text-align: center;
-            color: white;
-            padding: 40px;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-        }
-
-        /* Responsive */
         @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
+            header h1 { font-size: 2.2rem; }
             section { padding: 25px; }
         }
     </style>
@@ -132,58 +127,64 @@
 
     <header>
         <h1>Hernán Salinas Castro</h1>
-        <p>PhD student in Astrophysics</p>
-        
+        <p>PhD Student in Astronomy</p>
         <div class="social-links">
-            <a href="https://github.com/tu-usuario" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://scholar.google.com/" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+            <a href="https://github.com/hsalinascastro" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://scholar.google.com/" target="_blank"><i class="fas fa-graduation-cap"></i></a>
         </div>
     </header>
 
     <div class="container">
         <section id="about">
-            <h3>About me</h3>
-            <p>I am a PhD student in Astronomy at the Pontificia Universidad Católica de Chile. I completed my Bachelor's degree in Astronomy in 2024.
-
-My goal is to pursue a career in understanding planet formation by engaging in research on planetary systems and exploring the chemistry of planet-forming regions.
-
-I have experience working with data from various instruments and surveys, including TESS, SPECULOOS, LCOGT, and HARPS.</p>
+            <h3>About Me</h3>
+            <p>
+                I am a PhD student in Astronomy at the <strong>Pontificia Universidad Católica de Chile</strong>. 
+                I completed my Bachelor's degree in Astronomy in 2024. My research is driven by a deep 
+                curiosity about how worlds come to be.
+            </p>
+            <p>
+                My primary goal is to pursue a career in understanding planet formation by engaging in 
+                research on planetary systems and exploring the chemistry of planet-forming regions.
+            </p>
+            <p>
+                Throughout my academic path, I have gained extensive experience working with high-precision 
+                data from various instruments and global surveys, including <strong>TESS, SPECULOOS, LCOGT, 
+                and HARPS</strong>.
+            </p>
         </section>
 
         <section id="research">
             <h3>Research Areas</h3>
-            <p>Describe los temas principales en los que trabajas:</p>
-            <ul>
-                <li><strong>Gaseous planets around M-dwarf stars (GEMS)</strong> Descripción breve de la relevancia.</li>
-                <li><strong>Chemistry of FU Orionis objects using</strong> Detalles sobre tu enfoque técnico.</li>
-            </ul>
-        </section>
+            <p>Click on each area to see project details and images:</p>
+            
+            <a href="gems-project.html" class="research-link">
+                <i class="fas fa-chevron-right"></i>
+                <strong>Gaseous planets around M-dwarf stars (GEMS)</strong>
+                <span>Study of gas giant planets orbiting low-mass stars, focusing on their formation and evolution through the transit method.</span>
+            </a>
 
-        <section id="publications">
-            <h3>Publicaciones Seleccionadas</h3>
-            <div class="pub-list">
-                <div class="pub-item">
-                    <strong>Análisis avanzado de partículas moleculares</strong><br>
-                    Revista de Ciencia Aplicada, 2025.
-                </div>
-                <div class="pub-item">
-                    <strong>Modelado predictivo en entornos controlados</strong><br>
-                    Simposio Internacional de Investigación, 2024.
-                </div>
-            </div>
+            <a href="fu-orionis-project.html" class="research-link">
+                <i class="fas fa-chevron-right"></i>
+                <strong>Chemistry of FU Orionis objects</strong>
+                <span>Investigation of the chemical composition of young stellar objects undergoing accretion outbursts using infrared observations.</span>
+            </a>
         </section>
 
         <section id="contact">
-            <h3>Hablemos</h3>
-            <p>Estoy abierto a colaboraciones académicas y proyectos de investigación.</p>
-            <a href="mailto:tu-email@correo.com" class="contact-btn">
-                <i class="fas fa-envelope"></i> Enviar Correo
-            </a>
+            <h3>Hablemos / Contact</h3>
+            <p>If you are interested in a collaboration or have any questions, please fill out the form below:</p>
+            
+            <form action="https://formspree.io/f/tu-correo@ejemplo.com" method="POST" class="contact-form">
+                <input type="text" name="subject" placeholder="Asunto / Subject" required>
+                <input type="email" name="_replyto" placeholder="Tu correo / Your Email" required>
+                <textarea name="message" rows="5" placeholder="Mensaje / Message" required></textarea>
+                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+            </form>
         </section>
     </div>
 
     <footer>
-        &copy; 2026 Tu Nombre Apellido. Todos los derechos reservados.
+        &copy; 2026 Hernán Salinas Castro. Built with passion & GitHub Pages.
     </footer>
 
 </body>
