@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Adventures | Hernán Salinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #ff9f43;
+            --dark-bg: #050505;
+            --card-bg: #121212;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .back-nav {
+            padding: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .back-nav a:hover { color: var(--accent); }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px 80px;
+        }
+
+        .header i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+        .header h1 { font-size: 2.5rem; margin: 0; letter-spacing: 2px; }
+        .header p { opacity: 0.6; font-weight: 300; max-width: 600px; margin: 15px auto; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+
+        /* Estilo Masonry (Pinterest style) */
+        .gallery {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            background: var(--card-bg);
+            margin-bottom: 20px;
+            break-inside: avoid;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: 0.5s;
+            filter: grayscale(30%) brightness(0.8);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 159, 67, 0.2);
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            background: var(--card-bg);
+            border-top: 1px solid #222;
+        }
+
+        .caption strong { color: var(--accent); display: block; margin-bottom: 4px; }
+        .caption span { color: #888; font-size: 0.8rem; }
+
+        @media (max-width: 900px) { .gallery { column-count: 2; } }
+        @media (max-width: 600px) { .gallery { column-count: 1; } }
+
+        footer { text-align: center; padding: 50px; opacity: 0.4; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="back-nav">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Return to Portfolio</a>
+    </nav>
+
+    <div class="header">
+        <i class="fas fa-binoculars"></i>
+        <h1>Wild Encounters</h1>
+        <p>A personal photographic log of the fauna I've encountered during field work and travels across the globe.</p>
+    </div>
+
+    <div class="container">
+        <div class="gallery">
+            
+            <div class="gallery-item">
+                <img src="images/wildlife1.jpg" onerror="this.src='https://via.placeholder.com/400x600/111/444?text=Andean+Fox'">
+                <div class="caption">
+                    <strong>Andean Fox</strong>
+                    <span>Atacama Desert, Chile</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/wildlife2.jpg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Condor'">
+                <div class="caption">
+                    <strong>Andean Condor</strong>
+                    <span>Central Andes</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/wildlife3.jpg" onerror="this.src='https://via.placeholder.com/400x700/111/444?text=Llama'">
+                <div class="caption">
+                    <strong>Guanaco</strong>
+                    <span>High Altiplano</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/wildlife4.jpg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <div class="caption">
+                    <strong>Mountain Vizcacha</strong>
+                    <span>Paranal Observatory</span>
+                </div>
+            </div>
+
+            </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Hernán Salinas Castro | Capturing the Earth while looking at the Stars.
+    </footer>
+
+</body>
+</html>

@@ -65,7 +65,6 @@
             flex-wrap: wrap;
         }
 
-        /* Botón Naranja CV */
         .cv-btn {
             display: inline-flex;
             align-items: center;
@@ -85,7 +84,6 @@
             box-shadow: 0 8px 25px rgba(255, 159, 67, 0.5);
         }
 
-        /* Botón Azul Contacto */
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -104,7 +102,6 @@
             filter: brightness(1.2);
         }
 
-        /* Estilo de tarjetas de Investigación y Outreach */
         .card-link {
             display: block;
             text-decoration: none;
@@ -126,7 +123,6 @@
         .card-link strong { color: var(--primary); display: block; margin-bottom: 8px; font-size: 1.25rem; }
         .card-link span { font-size: 1rem; color: #666; display: block; line-height: 1.6; }
 
-        /* Social Links Header */
         .social-links { margin-top: 30px; }
         .social-links a { color: white; font-size: 2.2rem; margin: 0 15px; transition: 0.3s; text-decoration: none; opacity: 0.8; }
         .social-links a:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
@@ -139,6 +135,38 @@
             text-align: center;
             margin-top: 10px;
             box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+        }
+
+        /* --- NUEVA SECCIÓN WILDLIFE PREVIEW --- */
+        .wildlife-card {
+            background: #000;
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            margin-top: 35px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .wildlife-btn {
+            background: white;
+            color: black !important;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .wildlife-btn:hover {
+            background: var(--accent);
+            color: white !important;
+            transform: scale(1.05);
         }
 
         .play-btn {
@@ -225,8 +253,17 @@
                 <i class="fas fa-rocket"></i> Play Now
             </a>
         </div>
-    </div>
 
+        <div class="wildlife-card">
+            <i class="fas fa-paw" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+            <h4 style="margin: 0; font-size: 1.5rem;">Field Adventures: Wildlife</h4>
+            <p style="color: #bbb; margin: 10px 0;">Beyond the telescopes: Discover the animals I've met along the way.</p>
+            <a href="files/animals.html" class="wildlife-btn">
+                <i class="fas fa-camera"></i> View Gallery
+            </a>
+        </div>
+    </div>
+  
     <footer>
         &copy; 2026 Hernán Salinas Castro. <br>
         PhD Student in Astronomy | Pontificia Universidad Católica de Chile.
