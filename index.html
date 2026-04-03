@@ -11,6 +11,7 @@
         :root {
             --primary: #1a2a3a;
             --accent: #00d4ff;
+            --game-color: #6c5ce7;
             --text: #2d3436;
             --bg-light: rgba(255, 255, 255, 0.96);
         }
@@ -55,11 +56,35 @@
             margin-top: 0;
         }
 
-        #about p {
-            text-align: justify;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #444;
+        /* About Me & Action Buttons */
+        #about p { text-align: justify; font-size: 1.1rem; margin-bottom: 20px; color: #444; }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.game { background: var(--game-color); }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            filter: brightness(1.1);
         }
 
         /* Research Cards */
@@ -85,7 +110,7 @@
         .research-link span { font-size: 1rem; color: #666; display: block; line-height: 1.6; }
         .research-link i { float: right; color: var(--accent); font-size: 1.3rem; margin-top: 5px; }
 
-        /* Contact Grid Simplificado */
+        /* Contact Grid */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -106,32 +131,22 @@
             transition: all 0.3s ease;
         }
 
-        .contact-card i {
-            font-size: 2rem;
-            color: var(--accent);
-            min-width: 45px;
-            text-align: center;
-        }
-
-        .contact-card div strong { display: block; color: var(--primary); font-size: 1.1rem; margin-bottom: 2px; }
+        .contact-card i { font-size: 2rem; color: var(--accent); min-width: 45px; text-align: center; }
+        .contact-card div strong { display: block; color: var(--primary); font-size: 1.1rem; }
         .contact-card div span { font-size: 0.95rem; color: #777; }
 
-        .contact-card:hover {
-            background: #fdfdfd;
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
+        .contact-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
         .social-links { margin-top: 30px; }
-        .social-links a { color: white; font-size: 2.2rem; margin: 0 20px; transition: 0.3s; opacity: 0.8; text-decoration: none; }
-        .social-links a:hover { color: var(--accent); opacity: 1; transform: scale(1.1); display: inline-block; }
+        .social-links a { color: white; font-size: 2.2rem; margin: 0 20px; transition: 0.3s; text-decoration: none; }
+        .social-links a:hover { color: var(--accent); }
 
         footer { text-align: center; color: white; padding: 60px 20px; opacity: 0.7; font-size: 0.95rem; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 2.5rem; }
             section { padding: 30px 20px; }
+            .button-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -158,10 +173,15 @@
                 My primary goal is to pursue a career in understanding planet formation by engaging in 
                 research on planetary systems and exploring the complex chemistry of planet-forming regions.
             </p>
-            <p>
-                Throughout my academic path, I have gained extensive experience working with various high-precision 
-                instruments and global surveys, including <strong>TESS, SPECULOOS, LCOGT, and HARPS</strong>.
-            </p>
+            
+            <div class="button-group">
+                <a href="CV_Hernan_Salinas.pdf" target="_blank" class="action-btn">
+                    <i class="fas fa-file-pdf"></i> Download CV (PDF)
+                </a>
+                <a href="game.html" class="action-btn game">
+                    <i class="fas fa-gamepad"></i> Launch Astro-Game
+                </a>
+            </div>
         </section>
 
         <section id="research">
@@ -183,14 +203,12 @@
 
         <section id="contact">
             <h3>Contact & Connect</h3>
-            <p>Reach out for collaborations, academic inquiries, or networking:</p>
-            
             <div class="contact-grid">
                 <a href="mailto:hsalinasc@estudiante.uc.cl" class="contact-card">
                     <i class="fas fa-envelope"></i>
                     <div>
                         <strong>Email</strong>
-                        <span>tu-correo@puc.cl</span>
+                        <span>hsalinasc@estudiante.uc.cl</span>
                     </div>
                 </a>
 
@@ -198,7 +216,7 @@
                     <i class="fas fa-university"></i>
                     <div>
                         <strong>Academic Profile</strong>
-                        <span>Pontificia Universidad Católica de Chile</span>
+                        <span>UC Astrophysics Directory</span>
                     </div>
                 </a>
             </div>
