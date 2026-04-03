@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Earth Defense | Hernán Salinas</title>
+    <title>Planetary Defense | Hernán Salinas</title>
     <style>
         body { 
             margin: 0; 
-            background: #0a0a1a; 
+            background: #050510; 
             color: white; 
             font-family: 'Inter', sans-serif; 
             text-align: center;
@@ -14,37 +14,40 @@
         }
         canvas { 
             display: block; 
-            background: radial-gradient(circle, #1b2735 0%, #090a0f 100%);
+            background: radial-gradient(circle, #1b2735 0%, #050510 100%);
             margin: 10px auto; 
-            border: 3px solid #333;
-            border-radius: 10px;
-            cursor: none;
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            cursor: crosshair;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
         .ui { max-width: 500px; margin: 0 auto; }
         .leaderboard {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
             margin-top: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
-        h1 { margin-top: 20px; color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.5); }
-        .back-link { color: #00d4ff; text-decoration: none; font-weight: bold; }
+        h1 { margin-top: 15px; color: #00d4ff; letter-spacing: 2px; }
+        .back-link { color: #00d4ff; text-decoration: none; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; }
+        .back-link:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <h1>Earth Defense</h1>
-    <p>Esquiva Cometas (rojos) y Planetas (naranjas)</p>
+    <h1>PLANETARY DEFENSE</h1>
+    <p>Move Earth to dodge Comets and Giant Planets</p>
     
     <canvas id="gameCanvas" width="500" height="600"></canvas>
 
     <div class="ui">
         <div class="leaderboard">
             <strong>TOP 3 SURVIVORS</strong>
-            <div id="highscores">Cargando scores...</div>
+            <div id="highscores">Loading scores...</div>
         </div>
         <br>
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        <a href="index.html" class="back-link">← Return to Portfolio</a>
     </div>
 
     <script>
@@ -52,13 +55,24 @@
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('highscores');
 
-        let player = { x: 250, y: 550, size: 15 };
+        // --- IMAGE SOURCES ---
+        const earthImg = new Image();
+        earthImg.src = 'https://cdn-icons-png.flaticon.com/512/2240/2240634.png'; // Earth
+        
+        const cometImg = new Image();
+        cometImg.src = 'https://cdn-icons-png.flaticon.com/512/3039/3039430.png'; // Comet
+        
+        const planetImg = new Image();
+        planetImg.src = 'https://cdn-icons-png.flaticon.com/512/2530/2530113.png'; // Gas Giant
+
+        // --- GAME VARIABLES ---
+        let player = { x: 250, y: 550, size: 22 };
         let obstacles = [];
         let score = 0;
         let gameActive = true;
         let lastTime = Date.now();
 
-        // Cargar Highscores del navegador
+        // Load Highscores from LocalStorage
         let highscores = JSON.parse(localStorage.getItem('astroScores')) || [0, 0, 0];
 
         function updateLeaderboard() {
@@ -75,6 +89,7 @@
             updateLeaderboard();
         }
 
+        // Mouse tracking for player movement
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             player.x = e.clientX - rect.left;
@@ -82,45 +97,49 @@
         });
 
         function createObstacle() {
-            const isPlanet = Math.random() < 0.2; // 20% de probabilidad de planeta grande
+            const isPlanet = Math.random() < 0.25; // 25% chance to spawn a big planet
             obstacles.push({
                 x: Math.random() * canvas.width,
-                y: -50,
-                size: isPlanet ? 30 + Math.random() * 20 : 8,
-                speed: isPlanet ? 2 + Math.random() * 2 : 4 + Math.random() * 4,
+                y: -60,
+                size: isPlanet ? 40 + Math.random() * 20 : 15,
+                speed: isPlanet ? 2 + Math.random() * 1.5 : 4 + Math.random() * 4,
                 type: isPlanet ? 'planet' : 'comet',
-                color: isPlanet ? '#ff9f43' : '#ff4d4d'
+                angle: 0,
+                rotSpeed: (Math.random() - 0.5) * 0.1 // Rotation effect
             });
         }
 
         function update() {
             if (!gameActive) return;
 
-            // Score por tiempo: 2 puntos cada 5 segundos
+            // Score System: +2 points every 5 seconds
             let now = Date.now();
             if (now - lastTime >= 5000) {
                 score += 2;
                 lastTime = now;
             }
 
-            if (Math.random() < 0.08) createObstacle();
+            // Spawn obstacles randomly
+            if (Math.random() < 0.07) createObstacle();
 
             obstacles.forEach((obs, index) => {
                 obs.y += obs.speed;
+                obs.angle += obs.rotSpeed;
 
-                // Colisión Circular
+                // Collision Detection (Circle vs Circle)
                 let dx = player.x - obs.x;
                 let dy = player.y - obs.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < player.size + obs.size) {
+                if (distance < (player.size * 0.8) + (obs.size * 0.8)) {
                     gameActive = false;
                     saveScore(score);
-                    alert("¡COLISIÓN DETECTADA! \nPuntaje final: " + score);
+                    alert("COLLISION DETECTED! \nFinal Survival Score: " + score);
                     location.reload();
                 }
 
-                if (obs.y > canvas.height + 50) obstacles.splice(index, 1);
+                // Remove off-screen obstacles
+                if (obs.y > canvas.height + 100) obstacles.splice(index, 1);
             });
 
             draw();
@@ -130,43 +149,40 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Dibujar Estrellas de fondo
-            ctx.fillStyle = "white";
-            for(let i=0; i<20; i++) {
+            // Draw Background Stars
+            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+            for(let i=0; i<30; i++) {
                 ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1);
             }
 
-            // Dibujar Tierra (Jugador)
-            ctx.beginPath();
-            ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
-            ctx.fillStyle = "#4facfe"; // Azul Tierra
-            ctx.fill();
-            ctx.strokeStyle = "#ffffff";
-            ctx.stroke();
-
-            // Dibujar Obstáculos
+            // Draw Obstacles (Comets and Planets)
             obstacles.forEach(obs => {
-                ctx.beginPath();
-                ctx.arc(obs.x, obs.y, obs.size, 0, Math.PI * 2);
-                ctx.fillStyle = obs.color;
-                ctx.fill();
+                ctx.save();
+                ctx.translate(obs.x, obs.y);
+                ctx.rotate(obs.angle);
                 
-                // Efecto de brillo para cometas
-                if(obs.type === 'comet') {
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = "red";
-                } else {
-                    ctx.shadowBlur = 0;
-                }
+                let img = obs.type === 'planet' ? planetImg : cometImg;
+                // Draw image centered on coordinates
+                ctx.drawImage(img, -obs.size, -obs.size, obs.size*2, obs.size*2);
+                
+                ctx.restore();
             });
 
-            // Score actual en pantalla
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = "white";
-            ctx.font = "20px Arial";
-            ctx.fillText("Survival Time Score: " + score, 20, 30);
+            // Draw Earth (Player)
+            ctx.save();
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#00d4ff";
+            ctx.drawImage(earthImg, player.x - player.size, player.y - player.size, player.size*2, player.size*2);
+            ctx.restore();
+
+            // Real-time Score UI
+            ctx.fillStyle = "#00d4ff";
+            ctx.font = "bold 18px Inter";
+            ctx.textAlign = "left";
+            ctx.fillText("SURVIVAL POINTS: " + score, 20, 40);
         }
 
+        // Initialize highscore display and start game loop
         updateLeaderboard();
         update();
     </script>
