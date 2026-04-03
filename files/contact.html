@@ -10,8 +10,12 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background:linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-             url('images/back.png'); 
+            /* Se añade background-size: cover y background-attachment: fixed para que la imagen se vea */
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+                        url('images/back.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
             display: flex;
             justify-content: center;
@@ -28,36 +32,55 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             position: relative;
         }
-        h2 { border-left: 5px solid #ff9f43; padding-left: 15px; color: #1a2a3a; margin-top: 0; }
-        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; font-size: 1.1rem; }
-        .info-item i { color: #ff9f43; font-size: 1.5rem; width: 30px; text-align: center; }
+        h2 { border-left: 5px solid #ff9f43; padding-left: 15px; color: #1a2a3a; margin-top: 30px; margin-bottom: 20px; }
+        h2:first-child { margin-top: 0; }
+        
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1.05rem; text-decoration: none; color: inherit; }
+        .info-item i { color: #ff9f43; font-size: 1.4rem; width: 30px; text-align: center; }
+        
+        /* Estilo para el link de GitHub */
+        .profile-link { transition: 0.3s; cursor: pointer; text-decoration: none; }
+        .profile-link:hover { color: #ff9f43; }
+
         .back-btn {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 10px;
             text-decoration: none;
             color: #1a2a3a;
             font-weight: 600;
             font-size: 0.9rem;
             transition: 0.3s;
         }
-        .back-btn:hover { color: #ff9f43; }
+        .back-btn:hover { color: #ff9f43; transform: translateX(-5px); }
+        
+        .name-tag { margin-bottom: 25px; }
+        .name-tag strong { font-size: 1.4rem; color: #1a2a3a; display: block; }
+        .name-tag span { color: #666; font-weight: 400; }
     </style>
 </head>
 <body>
     
     <div class="contact-box">
-        <h2>CONTACT ME</h2>
-        <p><strong>Hernán Salinas Castro </strong></p> 
-        <p> PhD Student n Astrophysics</p>
+        <div class="name-tag">
+            <strong>Hernán Salinas Castro</strong>
+            <span>PhD Student in Astrophysics</span>
+        </div>
+
+        <h2>Contact Info</h2>
         <div class="info-item">
             <i class="fas fa-envelope"></i>
             <span>hsalinasc@estudiante.uc.cl</span>
         </div>
 
+        <a href="https://github.com/hsalinascastro" target="_blank" class="info-item profile-link">
+            <i class="fab fa-github"></i>
+            <span>GitHub Profile</span>
+        </a>
+
         <h2>Office Info</h2>
         <div class="info-item">
             <i class="fas fa-building"></i>
-            <span>Astrophysics Institute Faculty of Physics, PUC Chile</span>
+            <span>Astrophysics Institute, PUC Chile</span>
         </div>
         <div class="info-item">
             <i class="fas fa-door-open"></i>
@@ -67,8 +90,9 @@
             <i class="fas fa-map-marker-alt"></i>
             <span>Av. Vicuña Mackenna 4860, Santiago Chile</span>
         </div>
+
         <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-        <a href="../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
 </body>
 </html>
