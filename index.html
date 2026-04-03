@@ -20,8 +20,9 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             color: var(--text);
+            /* Usando tu imagen PNG como fondo con un overlay oscuro para legibilidad */
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
-                        url('https://www.universetoday.com/article_images/nrao21ao24a.jpg'); 
+                        url('images/back.png'); 
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
@@ -56,7 +57,6 @@
             margin-top: 0;
         }
 
-        /* About Me & Action Buttons */
         #about p { text-align: justify; font-size: 1.1rem; margin-bottom: 20px; color: #444; }
 
         .button-group {
@@ -78,8 +78,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-
-        .action-btn.game { background: var(--game-color); }
 
         .action-btn:hover {
             transform: translateY(-3px);
@@ -108,7 +106,6 @@
 
         .research-link strong { color: var(--primary); display: block; margin-bottom: 8px; font-size: 1.25rem; }
         .research-link span { font-size: 1rem; color: #666; display: block; line-height: 1.6; }
-        .research-link i { float: right; color: var(--accent); font-size: 1.3rem; margin-top: 5px; }
 
         /* Contact Grid */
         .contact-grid {
@@ -137,6 +134,38 @@
 
         .contact-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
+        /* Game Special Section */
+        .game-card {
+            background: linear-gradient(135deg, #1a2a3a 0%, #6c5ce7 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            margin-top: 10px;
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+        }
+
+        .game-card h4 { font-size: 1.6rem; margin-top: 0; margin-bottom: 15px; }
+        .game-card p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 25px; }
+
+        .play-btn {
+            background: white;
+            color: #6c5ce7 !important;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
         .social-links { margin-top: 30px; }
         .social-links a { color: white; font-size: 2.2rem; margin: 0 20px; transition: 0.3s; text-decoration: none; }
         .social-links a:hover { color: var(--accent); }
@@ -146,7 +175,6 @@
         @media (max-width: 600px) {
             header h1 { font-size: 2.5rem; }
             section { padding: 30px 20px; }
-            .button-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -178,9 +206,6 @@
                 <a href="CV_Hernan_Salinas.pdf" target="_blank" class="action-btn">
                     <i class="fas fa-file-pdf"></i> Download CV (PDF)
                 </a>
-                <a href="game.html" class="action-btn game">
-                    <i class="fas fa-gamepad"></i> Launch Astro-Game
-                </a>
             </div>
         </section>
 
@@ -189,13 +214,11 @@
             <p>Explore my current research projects and scientific contributions:</p>
             
             <a href="gems.project.html" class="research-link">
-                <i class="fas fa-arrow-right"></i>
                 <strong>Gaseous planets around M-dwarf stars (GEMS)</strong>
                 <span>Study of gas giant planets orbiting low mass stars, focusing on their formation and evolution through the transit method.</span>
             </a>
 
             <a href="fu-orionis-project.html" class="research-link">
-                <i class="fas fa-arrow-right"></i>
                 <strong>Chemistry of FU Orionis objects</strong>
                 <span>Investigation of the chemical composition of young stellar objects undergoing accretion outbursts using infrared observations.</span>
             </a>
@@ -221,6 +244,14 @@
                 </a>
             </div>
         </section>
+
+        <div class="game-card">
+            <h4>Mission: Earth Defense 🚀</h4>
+            <p>If you want to have some fun while saving the Earth, enter here and try to beat the high score!</p>
+            <a href="game.html" class="play-btn">
+                <i class="fas fa-rocket"></i> Play Now
+            </a>
+        </div>
     </div>
 
     <footer>
