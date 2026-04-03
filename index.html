@@ -54,11 +54,12 @@
             margin-bottom: 25px;
         }
 
-        /* Mejora en About Me */
+        /* Orden y Justificación en About Me */
         #about p {
             text-align: justify;
             font-size: 1.05rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            hyphens: auto;
         }
 
         /* Estilo para Research Areas */
@@ -66,25 +67,25 @@
             display: block;
             text-decoration: none;
             color: inherit;
-            padding: 20px;
+            padding: 25px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             background: white;
             border: 1px solid #eee;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .research-link:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        .research-link strong { color: var(--primary); display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        .research-link span { font-size: 0.95rem; color: #555; }
-        .research-link i { float: right; color: var(--accent); margin-top: 5px; }
+        .research-link strong { color: var(--primary); display: block; margin-bottom: 8px; font-size: 1.2rem; }
+        .research-link span { font-size: 0.95rem; color: #555; display: block; line-height: 1.5; }
+        .research-link i { float: right; color: var(--accent); font-size: 1.2rem; }
 
-        /* Formulario de Contacto */
+        /* Formulario de Contacto Funcional */
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -92,30 +93,47 @@
         }
 
         .contact-form input, .contact-form textarea {
-            padding: 12px;
+            width: 100%;
+            padding: 14px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
         }
 
         .submit-btn {
             background: var(--primary);
             color: white;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .submit-btn:hover { background: #2c3e50; }
+        .submit-btn:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+        }
 
         .social-links { margin-top: 25px; }
         .social-links a { color: white; font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
         .social-links a:hover { color: var(--accent); }
 
-        footer { text-align: center; color: white; padding: 40px; opacity: 0.8; }
+        footer { text-align: center; color: white; padding: 40px; opacity: 0.8; font-size: 0.9rem; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 2.2rem; }
@@ -138,46 +156,52 @@
         <section id="about">
             <h3>About Me</h3>
             <p>
-                I am a PhD student in Astronomy at the Pontificia Universidad Católica de Chile. 
+                I am a PhD student in Astronomy at the <strong>Pontificia Universidad Católica de Chile</strong>. 
                 I completed my Bachelor's degree in Astronomy in 2024. My research is driven by a deep 
-                curiosity about how worlds come to be.
+                curiosity about the fundamental processes that govern the universe and how worlds come to be.
             </p>
             <p>
                 My primary goal is to pursue a career in understanding planet formation by engaging in 
-                research on planetary systems and exploring the chemistry of planet forming regions.
+                research on planetary systems and exploring the complex chemistry of planet-forming regions.
             </p>
             <p>
-                Throughout my academic path, I have gained extensive experience working with various instruments and global surveys, including TESS, SPECULOOS, LCOGT, 
-                and HARPS.
+                Throughout my academic path, I have gained extensive experience working with various high-precision 
+                instruments and global surveys, including <strong>TESS, SPECULOOS, LCOGT, and HARPS</strong>.
             </p>
         </section>
 
         <section id="research">
             <h3>Research Areas</h3>
-            <p>Click on each area to see project details and images:</p>
+            <p>Click on each area to see detailed descriptions, images, and project insights:</p>
             
             <a href="gems.project.html" class="research-link">
-                <i class="fas fa-chevron-right"></i>
+                <i class="fas fa-external-link-alt"></i>
                 <strong>Gaseous planets around M-dwarf stars (GEMS)</strong>
                 <span>Study of gas giant planets orbiting low mass stars, focusing on their formation and evolution through the transit method.</span>
             </a>
 
             <a href="fu-orionis-project.html" class="research-link">
-                <i class="fas fa-chevron-right"></i>
+                <i class="fas fa-external-link-alt"></i>
                 <strong>Chemistry of FU Orionis objects</strong>
                 <span>Investigation of the chemical composition of young stellar objects undergoing accretion outbursts using infrared observations.</span>
             </a>
         </section>
 
         <section id="contact">
-            <h3>Contact</h3>
-            <p>If you are interested in a collaboration or have any questions, please fill out the form below:</p>
+            <h3>Contact Me</h3>
+            <p>If you are interested in a collaboration, have questions about my research, or just want to say hi, please fill out the form below:</p>
             
-            <form action="https://formspree.io/f/tu-correo@ejemplo.com" method="POST" class="contact-form">
+            <form action="https://formspree.io/f/hr.salinascastro@gmail.com" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Tu Nombre / Full Name" required>
                 <input type="text" name="subject" placeholder="Asunto / Subject" required>
                 <input type="email" name="_replyto" placeholder="Tu correo / Your Email" required>
-                <textarea name="message" rows="5" placeholder="Mensaje / Message" required></textarea>
-                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                <textarea name="message" rows="5" placeholder="Escribe tu mensaje aquí / Write your message here..." required></textarea>
+                
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                </button>
             </form>
         </section>
     </div>
