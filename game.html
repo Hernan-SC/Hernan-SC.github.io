@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Astro Dodge | Hernán Salinas</title>
+    <style>
+        body { margin: 0; background: #000; overflow: hidden; color: white; font-family: sans-serif; text-align: center; }
+        canvas { display: block; background: #050505; margin: 20px auto; border: 2px solid #333; }
+    </style>
+</head>
+<body>
+    <h1>Astro Dodge</h1>
+    <p>Mueve el mouse para esquivar</p>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <a href="index.html" style="color: cyan;">Volver al sitio</a>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let player = { x: 200, y: 450, size: 20 };
+        let enemies = [];
+        let score = 0;
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            player.x = e.clientX - rect.left;
+        });
+
+        function update() {
+            if (Math.random() < 0.05) enemies.push({ x: Math.random() * 400, y: 0, size: 15 });
+            enemies.forEach(en => en.y += 5);
+            enemies = enemies.filter(en => en.y < 500);
+            
+            // Colisión simple
+            enemies.forEach(en => {
+                if (Math.abs(en.x - player.x) < 20 && Math.abs(en.y - player.y) < 20) {
+                    score = 0;
+                    enemies = [];
+                }
+            });
+            score++;
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, 400, 500);
+            ctx.fillStyle = 'cyan';
+            ctx.fillRect(player.x - 10, player.y - 10, 20, 20); // Jugador
+            ctx.fillStyle = 'red';
+            enemies.forEach(en => ctx.beginPath() || ctx.arc(en.x, en.y, en.size, 0, Math.PI*2) || ctx.fill());
+            ctx.fillStyle = 'white';
+            ctx.fillText("Score: " + score, 10, 20);
+        }
+        update();
+    </script>
+</body>
+</html>
