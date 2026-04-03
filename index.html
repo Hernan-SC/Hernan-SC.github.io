@@ -189,21 +189,30 @@
 
         <section id="contact">
             <h3>Contact Me</h3>
-            <p>If you are interested in a collaboration, have questions about my research, or just want to say hi, please fill out the form below:</p>
-            
-            <form action="https://formspree.io/f/hr.salinascastro@gmail.com" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Tu Nombre / Full Name" required>
-                <input type="text" name="subject" placeholder="Asunto / Subject" required>
-                <input type="email" name="_replyto" placeholder="Tu correo / Your Email" required>
-                <textarea name="message" rows="5" placeholder="Escribe tu mensaje aquí / Write your message here..." required></textarea>
-                
-                <input type="text" name="_gotcha" style="display:none">
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+            <form id="contactForm" class="contact-form">
+                <input type="text" id="name" placeholder="Tu Nombre / Full Name" required>
+                <input type="text" id="subject" placeholder="Asunto / Subject" required>
+                <textarea id="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        
+                <button type="button" onclick="sendMail()" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Preparar Correo
                 </button>
             </form>
         </section>
+
+        <script>
+        function sendMail() {
+            const name = document.getElementById('name').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const email = "hr.salinascastro@gmail.com"; 
+
+ 
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("De: " + name + "\n\n" + message)}`;
+    
+            window.location.href = mailtoLink;
+        }
+        </script>
     </div>
 
     <footer>
