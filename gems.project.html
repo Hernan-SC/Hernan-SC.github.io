@@ -30,6 +30,8 @@
             padding: 20px;
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .nav-back a {
@@ -38,21 +40,33 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: 0.3s;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
         }
 
-        .nav-back a:hover { color: var(--accent); }
+        .nav-back a:hover { color: var(--accent); background: rgba(0,0,0,0.8); }
 
-        .container { max-width: 900px; margin: 20px auto 60px; padding: 0 20px; }
+        .container { max-width: 900px; margin: -50px auto 60px; padding: 0 20px; position: relative; }
+
+    
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+            display: block;
+        }
 
         section {
             background: var(--bg-light);
             padding: 50px;
-            border-radius: 20px;
+            border-radius: 0 0 20px 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        h1 { color: var(--primary); font-size: 2.2rem; margin-top: 0; line-height: 1.2; }
-        h2 { color: var(--primary); font-size: 1.5rem; margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h1 { color: var(--primary); font-size: 2.2rem; margin-top: 20px; line-height: 1.2; }
+        h2 { color: var(--primary); font-size: 1.5rem; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
 
         .project-meta {
             display: flex;
@@ -70,36 +84,41 @@
             font-weight: 600;
         }
 
-        /* Contenedor de Imágenes Científicas */
         .science-fig {
-            margin: 30px 0;
+            margin: 35px 0;
             text-align: center;
         }
 
         .science-fig img {
             max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
         }
 
         .caption {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 10px;
+            margin-top: 12px;
             font-style: italic;
+            padding: 0 20px;
         }
 
         .highlight-box {
-            background: #f8f9fa;
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 10px 10px 0;
+            background: #f1f9ff;
+            border-left: 5px solid var(--accent);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
         }
 
-        footer { text-align: center; color: white; padding: 20px; opacity: 0.7; }
+        footer { text-align: center; color: white; padding: 40px; opacity: 0.7; }
 
-        @media (max-width: 600px) { section { padding: 25px; } h1 { font-size: 1.8rem; } }
+        @media (max-width: 600px) { 
+            section { padding: 25px; } 
+            h1 { font-size: 1.8rem; }
+            .hero-image { height: 200px; }
+        }
     </style>
 </head>
 <body>
@@ -109,6 +128,8 @@
     </div>
 
     <div class="container">
+        <img src="images/gems.png" alt="GEMS Research Header" class="hero-image">
+        
         <section>
             <h1>Gaseous Planets around M-dwarf stars (GEMS)</h1>
             
@@ -121,32 +142,26 @@
             <p>
                 Current planet formation models face challenges in predicting the existence of giant planets around M-dwarf stars, especially in short period orbits. 
                 The observed low occurrence rate of such planets is generally consistent with expectations based on the limited mass reservoir available in protoplanetary disks around low mass stars.
-
-                my work focuses on monitoring and recharacterizing these planetary systems using the transit method.
             </p>
-
-            <div class="science-fig">
-                <img src="images/phase_Sector_38.png" alt="Transit Light Curve">
-                <div class="caption">Figure 1: Example of a transit light curve from a candidate in the GEMS survey.</div>
-            </div>
+            
+            <p>
+                My work focuses on monitoring and recharacterizing these planetary systems using the transit method to better understand their physical properties and formation history.
+            </p>
 
             <h2>Transit method</h2>
             <p>
-                This technique consists of detecting and analyzing the periodic dimming of a star’s brightness as a planet passes in front of it, allowing us to measure key properties such as the planet’s radius, orbital period, 
-                and refine system parameters.
+                This technique consists of detecting and analyzing the periodic dimming of a star’s brightness as a planet passes in front of it, allowing us to measure key properties such as the planet’s radius, orbital period, and refine system parameters.
             </p>
+
+            <div class="science-fig">
+                <img src="images/phase_Sector_38.png" alt="Transit Light Curve GEMS">
+                <div class="caption">Figure 1: Example of a transit light curve (Phase-folded) from a candidate in the GEMS survey, showing the characteristic dip in brightness.</div>
+            </div>
 
             <div class="highlight-box">
                 <strong>Key Methodology:</strong> We utilize high-precision radial velocity data from instruments like 
                 <strong>HARPS</strong> to break the mass-radius degeneracy and confirm the planetary nature of our candidates.
             </div>
-
-            <h2>Current Progress</h2>
-            <p>
-                During my doctoral research, I have been focused on [Escribe aquí un avance específico, por ejemplo: 
-                analyzing 15 new candidates from the southern hemisphere]. Preliminary results suggest that 
-                [añade una conclusión breve o hallazgo].
-            </p>
 
             <div class="science-fig">
                 <img src="https://via.placeholder.com/800x400/f0f0f0/999999?text=Mass-Radius+Relationship+Plot" alt="Mass-Radius Plot">
