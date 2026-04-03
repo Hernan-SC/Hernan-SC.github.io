@@ -1,56 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Astro Dodge | Hernán Salinas</title>
+    <meta charset="UTF-8">
+    <title>Earth Defense | Hernán Salinas</title>
     <style>
-        body { margin: 0; background: #000; overflow: hidden; color: white; font-family: sans-serif; text-align: center; }
-        canvas { display: block; background: #050505; margin: 20px auto; border: 2px solid #333; }
+        body { 
+            margin: 0; 
+            background: #0a0a1a; 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            text-align: center;
+            overflow: hidden;
+        }
+        canvas { 
+            display: block; 
+            background: radial-gradient(circle, #1b2735 0%, #090a0f 100%);
+            margin: 10px auto; 
+            border: 3px solid #333;
+            border-radius: 10px;
+            cursor: none;
+        }
+        .ui { max-width: 500px; margin: 0 auto; }
+        .leaderboard {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        h1 { margin-top: 20px; color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.5); }
+        .back-link { color: #00d4ff; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Astro Dodge</h1>
-    <p>Mueve el mouse para esquivar</p>
-    <canvas id="gameCanvas" width="400" height="500"></canvas>
-    <a href="index.html" style="color: cyan;">Volver al sitio</a>
+
+    <h1>Earth Defense</h1>
+    <p>Esquiva Cometas (rojos) y Planetas (naranjas)</p>
+    
+    <canvas id="gameCanvas" width="500" height="600"></canvas>
+
+    <div class="ui">
+        <div class="leaderboard">
+            <strong>TOP 3 SURVIVORS</strong>
+            <div id="highscores">Cargando scores...</div>
+        </div>
+        <br>
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    </div>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        let player = { x: 200, y: 450, size: 20 };
-        let enemies = [];
+        const scoreElement = document.getElementById('highscores');
+
+        let player = { x: 250, y: 550, size: 15 };
+        let obstacles = [];
         let score = 0;
+        let gameActive = true;
+        let lastTime = Date.now();
+
+        // Cargar Highscores del navegador
+        let highscores = JSON.parse(localStorage.getItem('astroScores')) || [0, 0, 0];
+
+        function updateLeaderboard() {
+            scoreElement.innerHTML = highscores
+                .map((s, i) => `<br>${i+1}. ${s} pts`)
+                .join('');
+        }
+
+        function saveScore(finalScore) {
+            highscores.push(finalScore);
+            highscores.sort((a, b) => b - a);
+            highscores = highscores.slice(0, 3);
+            localStorage.setItem('astroScores', JSON.stringify(highscores));
+            updateLeaderboard();
+        }
 
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             player.x = e.clientX - rect.left;
+            player.y = e.clientY - rect.top;
         });
 
-        function update() {
-            if (Math.random() < 0.05) enemies.push({ x: Math.random() * 400, y: 0, size: 15 });
-            enemies.forEach(en => en.y += 5);
-            enemies = enemies.filter(en => en.y < 500);
-            
-            // Colisión simple
-            enemies.forEach(en => {
-                if (Math.abs(en.x - player.x) < 20 && Math.abs(en.y - player.y) < 20) {
-                    score = 0;
-                    enemies = [];
-                }
+        function createObstacle() {
+            const isPlanet = Math.random() < 0.2; // 20% de probabilidad de planeta grande
+            obstacles.push({
+                x: Math.random() * canvas.width,
+                y: -50,
+                size: isPlanet ? 30 + Math.random() * 20 : 8,
+                speed: isPlanet ? 2 + Math.random() * 2 : 4 + Math.random() * 4,
+                type: isPlanet ? 'planet' : 'comet',
+                color: isPlanet ? '#ff9f43' : '#ff4d4d'
             });
-            score++;
+        }
+
+        function update() {
+            if (!gameActive) return;
+
+            // Score por tiempo: 2 puntos cada 5 segundos
+            let now = Date.now();
+            if (now - lastTime >= 5000) {
+                score += 2;
+                lastTime = now;
+            }
+
+            if (Math.random() < 0.08) createObstacle();
+
+            obstacles.forEach((obs, index) => {
+                obs.y += obs.speed;
+
+                // Colisión Circular
+                let dx = player.x - obs.x;
+                let dy = player.y - obs.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < player.size + obs.size) {
+                    gameActive = false;
+                    saveScore(score);
+                    alert("¡COLISIÓN DETECTADA! \nPuntaje final: " + score);
+                    location.reload();
+                }
+
+                if (obs.y > canvas.height + 50) obstacles.splice(index, 1);
+            });
+
             draw();
             requestAnimationFrame(update);
         }
 
         function draw() {
-            ctx.clearRect(0, 0, 400, 500);
-            ctx.fillStyle = 'cyan';
-            ctx.fillRect(player.x - 10, player.y - 10, 20, 20); // Jugador
-            ctx.fillStyle = 'red';
-            enemies.forEach(en => ctx.beginPath() || ctx.arc(en.x, en.y, en.size, 0, Math.PI*2) || ctx.fill());
-            ctx.fillStyle = 'white';
-            ctx.fillText("Score: " + score, 10, 20);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar Estrellas de fondo
+            ctx.fillStyle = "white";
+            for(let i=0; i<20; i++) {
+                ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1);
+            }
+
+            // Dibujar Tierra (Jugador)
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
+            ctx.fillStyle = "#4facfe"; // Azul Tierra
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.stroke();
+
+            // Dibujar Obstáculos
+            obstacles.forEach(obs => {
+                ctx.beginPath();
+                ctx.arc(obs.x, obs.y, obs.size, 0, Math.PI * 2);
+                ctx.fillStyle = obs.color;
+                ctx.fill();
+                
+                // Efecto de brillo para cometas
+                if(obs.type === 'comet') {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = "red";
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+            });
+
+            // Score actual en pantalla
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = "white";
+            ctx.font = "20px Arial";
+            ctx.fillText("Survival Time Score: " + score, 20, 30);
         }
+
+        updateLeaderboard();
         update();
     </script>
 </body>
