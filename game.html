@@ -25,7 +25,7 @@
             <div id="highscores">Loading scores...</div>
         </div>
         <br>
-        <a href="index.html" class="back-link">← Return to Portfolio</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
     </div>
 
     <script>
@@ -45,14 +45,14 @@
             imgData.obj.src = imgData.src;
         });
 
-        // --- GAME VARIABLES ---
+    
         let player = { x: 250, y: 550, size: 22 };
         let obstacles = [];
         let score = 0;
         let gameActive = true;
         let lastTime = Date.now();
 
-        // Load Highscores (Each entry is an object: {name: "AAA", pts: 0})
+        
         let highscores = JSON.parse(localStorage.getItem('astroScoresV2')) || [
             {name: "---", pts: 0}, {name: "---", pts: 0}, {name: "---", pts: 0}
         ];
@@ -103,7 +103,7 @@
             if (!gameActive) return;
 
             let now = Date.now();
-            if (now - lastTime >= 5000) { score += 2; lastTime = now; }
+            if (now - lastTime >= 2000) { score += 2; lastTime = now; }
             if (Math.random() < 0.07) createObstacle();
 
             obstacles.forEach((obs, index) => {
@@ -129,11 +129,11 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Stars
+            
             ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
             for(let i=0; i<30; i++) { ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1); }
 
-            // Draw Obstacles
+            
             obstacles.forEach(obs => {
                 ctx.save();
                 ctx.translate(obs.x, obs.y);
@@ -148,7 +148,7 @@
                 ctx.restore();
             });
 
-            // Draw Player
+            
             ctx.save();
             if (images.earth.loaded) {
                 ctx.shadowBlur = 15; ctx.shadowColor = "#00d4ff";
