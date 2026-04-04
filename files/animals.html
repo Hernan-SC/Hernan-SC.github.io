@@ -53,7 +53,7 @@
         .header h1 { font-size: 2.5rem; margin: 0; letter-spacing: 2px; }
         .header p { opacity: 0.6; font-weight: 300; max-width: 600px; margin: 15px auto; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
 
         /* Estilo Masonry (Pinterest style) */
         .gallery {
@@ -99,8 +99,59 @@
         .caption strong { color: var(--accent); display: block; margin-bottom: 4px; }
         .caption span { color: #888; font-size: 0.8rem; }
 
-        @media (max-width: 900px) { .gallery { column-count: 2; } }
-        @media (max-width: 600px) { .gallery { column-count: 1; } }
+        /* --- SECCIÓN RANDOM COLLAGE --- */
+        .random-section {
+            text-align: center;
+            padding: 50px 0;
+            border-top: 1px solid #222;
+        }
+
+        .random-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .random-btn:hover {
+            background: var(--accent);
+            color: black;
+        }
+
+        #random-collage {
+            display: none; /* Oculto por defecto */
+            margin-top: 40px;
+            line-height: 0;
+            column-count: 4;
+            column-gap: 10px;
+        }
+
+        #random-collage img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            filter: brightness(0.9);
+            transition: 0.3s;
+        }
+
+        #random-collage img:hover { filter: brightness(1.1); }
+
+        @media (max-width: 900px) { 
+            .gallery { column-count: 2; } 
+            #random-collage { column-count: 2; }
+        }
+        @media (max-width: 600px) { 
+            .gallery { column-count: 1; } 
+            #random-collage { column-count: 1; }
+        }
 
         footer { text-align: center; padding: 50px; opacity: 0.4; font-size: 0.8rem; }
     </style>
@@ -121,7 +172,7 @@
         <div class="gallery">
             
             <div class="gallery-item">
-                <img src="../images/v_dog_chill.jpeg" onerror="this.src='https://via.placeholder.com/400x600/111/444?text=Andean+Fox'">
+                <img src="../images/v_dog_chill.jpeg">
                 <div class="caption">
                     <strong>Chilling Dog</strong>
                     <span>Valparaíso, Chile</span>
@@ -129,7 +180,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="../images/cat_nina.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Condor'">
+                <img src="../images/cat_nina.jpeg">
                 <div class="caption">
                     <strong>Cat yawning</strong>
                     <span>Santiago, Chile</span>
@@ -137,7 +188,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="../images/dog_chanco.jpeg" onerror="this.src='https://via.placeholder.com/400x700/111/444?text=Llama'">
+                <img src="../images/dog_chanco.jpeg">
                 <div class="caption">
                     <strong>Night Dog</strong>
                     <span>Chanco, Chile</span>
@@ -145,62 +196,97 @@
             </div>
 
             <div class="gallery-item">
-                <img src="../images/rana.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/rana.jpeg">
                 <div class="caption">
                     <strong>Little Frog</strong>
                     <span>Chanco. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/horsea.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/horsea.jpeg">
                 <div class="caption">
                     <strong>Cute horse</strong>
                     <span>Chanco. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/lagar.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/lagar.jpeg">
                 <div class="caption">
                     <strong>Sun Lizard</strong>
                     <span>Chanco. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/fam_oru.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/fam_oru.jpeg">
                 <div class="caption">
                     <strong>Caterpillar family</strong>
                     <span>Chanco. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/fish.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/fish.jpeg">
                 <div class="caption">
                     <strong>Bubble blowers</strong>
                     <span>Parque Bicentenario. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/Quilico.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/Quilico.jpeg">
                 <div class="caption">
                     <strong>why are you looking at me?</strong>
                     <span>Quilaco. Chile</span>
                 </div>
             </div>
+
             <div class="gallery-item">
-                <img src="../images/dog_playa.jpeg" onerror="this.src='https://via.placeholder.com/400x400/111/444?text=Vizcacha'">
+                <img src="../images/dog_playa.jpeg">
                 <div class="caption">
                     <strong>Enjoying the beach</strong>
                     <span>Cobquecura. Chile</span>
                 </div>
             </div>
 
-
+            <div class="gallery-item">
+                <img src="../images/tequila.jpeg">
+                <div class="caption">
+                    <strong>Photo of beautiful Tequila </strong>
+                    <span>Santiago. Chile</span>
+                </div>
             </div>
+        </div>
+
+        <div class="random-section">
+            <button class="random-btn" onclick="toggleRandom()">Show Random Collage</button>
+            
+            <div id="random-collage">
+                <img src="../images/copihue.jpeg" onerror="this.style.display='none'">
+                <img src="../images/playa.jpeg" onerror="this.style.display='none'">
+            </div>
+        </div>
     </div>
 
     <footer>
         &copy; 2026 Hernán Salinas Castro.
     </footer>
+
+    <script>
+        function toggleRandom() {
+            var collage = document.getElementById("random-collage");
+            var btn = document.querySelector(".random-btn");
+            if (collage.style.display === "none" || collage.style.display === "") {
+                collage.style.display = "block";
+                btn.innerText = "Hide Random Collage";
+            } else {
+                collage.style.display = "none";
+                btn.innerText = "Show Random Collage";
+            }
+        }
+    </script>
 
 </body>
 </html>
