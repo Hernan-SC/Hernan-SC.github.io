@@ -4,33 +4,33 @@
     <meta charset="UTF-8">
     <title>Planetary Defense | Hernán Salinas</title>
     <style>
-        body { margin: 0; background: #0a0000; color: white; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
+        body { margin: 0; background: #050005; color: white; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
         
-        /* Cambio de celeste a Burdeo Neón */
+        /* Borde Morado Neón */
         canvas { 
             display: block; 
             background: #000; 
             margin: 10px auto; 
-            border: 2px solid #800020; /* Burdeo */
+            border: 2px solid #bc13fe; 
             border-radius: 15px; 
             cursor: crosshair;
-            box-shadow: 0 0 20px rgba(128, 0, 32, 0.5);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
         }
 
         .ui { max-width: 500px; margin: 0 auto; }
         
         .leaderboard { 
-            background: rgba(128, 0, 32, 0.1); 
+            background: rgba(188, 19, 254, 0.05); 
             padding: 15px; 
             border-radius: 12px; 
             margin-top: 10px; 
-            border: 1px solid rgba(128, 0, 32, 0.4); 
+            border: 1px solid rgba(188, 19, 254, 0.3); 
         }
 
-        h1 { margin-top: 15px; color: #ff0033; letter-spacing: 4px; text-shadow: 0 0 15px #800020; }
+        h1 { margin-top: 15px; color: #bc13fe; letter-spacing: 4px; text-shadow: 0 0 15px #bc13fe; }
         
         .back-link { 
-            color: #ff4d4d; 
+            color: #d870ff; 
             text-decoration: none; 
             font-size: 0.9rem; 
             opacity: 0.7; 
@@ -38,20 +38,20 @@
             padding: 10px; 
             display: inline-block; 
         }
-        .back-link:hover { opacity: 1; text-shadow: 0 0 10px #ff0000; }
+        .back-link:hover { opacity: 1; text-shadow: 0 0 10px #bc13fe; }
         
-        #highscores { line-height: 1.6; font-family: monospace; font-size: 1.1rem; color: #ff9999; }
+        #highscores { line-height: 1.6; font-family: monospace; font-size: 1.1rem; color: #eec9ff; }
     </style>
 </head>
 <body>
 
     <h1>PLANETARY DEFENSE</h1>
-    <p style="color: #666;">Move Earth to dodge Comets and Giant Planets</p>
+    <p style="color: #888;">Move Earth to dodge Comets and Giant Planets</p>
     <canvas id="gameCanvas" width="500" height="600"></canvas>
 
     <div class="ui">
         <div class="leaderboard">
-            <strong style="color: #ff0033;">TOP 3 SURVIVORS</strong>
+            <strong style="color: #bc13fe;">TOP 3 SURVIVORS</strong>
             <div id="highscores">Loading scores...</div>
         </div>
         <br>
@@ -80,14 +80,14 @@
         let gameActive = false; 
         let lastTime = Date.now();
 
-        // --- SISTEMA DE ESTRELLAS ANIMADAS ---
+        // Estrellas animadas
         let stars = [];
         for(let i=0; i<80; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 2,
-                speed: Math.random() * 0.5 + 0.2
+                speed: Math.random() * 0.6 + 0.1
             });
         }
 
@@ -151,7 +151,6 @@
         function update() {
             if (!gameActive) return;
 
-            // Update Stars (Background movement)
             stars.forEach(star => {
                 star.y += star.speed;
                 if (star.y > canvas.height) star.y = 0;
@@ -182,19 +181,17 @@
         }
 
         function draw() {
-            // Fondo Negro Sólido
             ctx.fillStyle = "#000";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Estrellas en movimiento
+            // Estrellas
             ctx.fillStyle = "white";
             stars.forEach(star => {
-                ctx.globalAlpha = star.speed; // Estrellas lentas son más tenues
+                ctx.globalAlpha = star.speed;
                 ctx.fillRect(star.x, star.y, star.size, star.size);
             });
             ctx.globalAlpha = 1.0;
 
-            // Obstáculos
             obstacles.forEach(obs => {
                 ctx.save();
                 ctx.translate(obs.x, obs.y);
@@ -209,33 +206,32 @@
                 ctx.restore();
             });
 
-            // Jugador (La Tierra) con brillo neón burdeo
+            // JUGADOR CON NEÓN CELESTE (Original)
             ctx.save();
             if (images.earth.loaded) {
                 ctx.shadowBlur = 20; 
-                ctx.shadowColor = "#ff0033"; // Resplandor Burdeo neón
+                ctx.shadowColor = "#00d4ff"; 
                 ctx.drawImage(images.earth.obj, player.x - player.size, player.y - player.size, player.size*2, player.size*2);
             } else {
                 ctx.beginPath(); ctx.arc(player.x, player.y, player.size, 0, Math.PI*2);
-                ctx.fillStyle = "#ff0033"; ctx.fill();
+                ctx.fillStyle = "#00d4ff"; ctx.fill();
             }
             ctx.restore();
 
-            // Puntos UI
-            ctx.fillStyle = "#ff0033";
+            // Puntos con color Morado
+            ctx.fillStyle = "#bc13fe";
             ctx.font = "bold 20px Inter";
             ctx.textAlign = "left";
             ctx.fillText("SCORE: " + score, 20, 40);
 
-            // Pantalla de inicio (Overlay)
             if (!gameActive) {
-                ctx.fillStyle = "rgba(10, 0, 0, 0.8)";
+                ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                ctx.fillStyle = "#ff0033";
+                ctx.fillStyle = "#bc13fe";
                 ctx.textAlign = "center";
                 ctx.font = "bold 28px Inter";
-                ctx.shadowBlur = 10; ctx.shadowColor = "#ff0033";
+                ctx.shadowBlur = 15; ctx.shadowColor = "#bc13fe";
                 ctx.fillText("INSERT COIN", canvas.width/2, canvas.height/2 - 20);
                 
                 ctx.shadowBlur = 0;
