@@ -9,7 +9,8 @@
         .ui { max-width: 500px; margin: 0 auto; }
         .leaderboard { background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 12px; margin-top: 10px; border: 1px solid rgba(0, 212, 255, 0.3); }
         h1 { margin-top: 15px; color: #00d4ff; letter-spacing: 2px; }
-        .back-link { color: #00d4ff; text-decoration: none; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; }
+        .back-link { color: #00d4ff; text-decoration: none; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; padding: 10px; display: inline-block; }
+        .back-link:hover { opacity: 1; text-shadow: 0 0 10px #00d4ff; }
         #highscores { line-height: 1.6; font-family: monospace; font-size: 1.1rem; }
     </style>
 </head>
@@ -33,7 +34,6 @@
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('highscores');
 
-        // --- IMAGE SYSTEM ---
         const images = {
             earth: { src: 'images/game/tl.png', loaded: false, obj: new Image(), color: '#00d4ff' },
             comet: { src: 'images/game/meto.png', loaded: false, obj: new Image(), color: '#ff4d4d' },
@@ -45,14 +45,12 @@
             imgData.obj.src = imgData.src;
         });
 
-    
         let player = { x: 250, y: 550, size: 22 };
         let obstacles = [];
         let score = 0;
-        let gameActive = true;
+        let gameActive = false; // COMIENZA EN FALSE PARA EL "INSERT COIN"
         let lastTime = Date.now();
 
-        
         let highscores = JSON.parse(localStorage.getItem('astroScoresV2')) || [
             {name: "---", pts: 0}, {name: "---", pts: 0}, {name: "---", pts: 0}
         ];
@@ -64,23 +62,40 @@
         }
 
         function saveScore(finalScore) {
-            // Ask for initials (max 3 chars)
-            let userName = prompt("GAME OVER! Enter your initials (3 letters):", "AAA");
+            let userName = prompt("GAME OVER!\nScore: " + finalScore + "\n\nEnter your initials (3 letters):", "AAA");
             
-            // Clean name: max 3 chars, default to "UNK" if empty
             if (!userName) userName = "UNK";
             userName = userName.substring(0, 3).toUpperCase();
 
-            // Add to list, sort and keep top 3
             highscores.push({ name: userName, pts: finalScore });
             highscores.sort((a, b) => b.pts - a.pts);
             highscores = highscores.slice(0, 3);
             
             localStorage.setItem('astroScoresV2', JSON.stringify(highscores));
             updateLeaderboard();
+            
+            // En lugar de reload(), reseteamos variables para que aparezca el "Insert Coin" de nuevo
+            resetGame();
         }
 
+        function resetGame() {
+            obstacles = [];
+            score = 0;
+            gameActive = false;
+            player = { x: 250, y: 300, size: 22 }; // Centrar jugador al inicio
+        }
+
+        // --- CLICK PARA EMPEZAR ---
+        canvas.addEventListener('mousedown', () => {
+            if (!gameActive) {
+                gameActive = true;
+                lastTime = Date.now();
+                update();
+            }
+        });
+
         canvas.addEventListener('mousemove', (e) => {
+            if (!gameActive) return;
             const rect = canvas.getBoundingClientRect();
             player.x = e.clientX - rect.left;
             player.y = e.clientY - rect.top;
@@ -116,24 +131,24 @@
 
                 if (distance < (player.size * 0.8) + (obs.size * 0.8)) {
                     gameActive = false;
-                    saveScore(score);
-                    location.reload();
+                    setTimeout(() => saveScore(score), 100); // Pequeño delay para ver el choque
+                    return;
                 }
                 if (obs.y > canvas.height + 100) obstacles.splice(index, 1);
             });
 
             draw();
-            requestAnimationFrame(update);
+            if (gameActive) requestAnimationFrame(update);
         }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            
+            // Estrellas de fondo
             ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-            for(let i=0; i<30; i++) { ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1); }
+            for(let i=0; i<30; i++) { ctx.fillRect((i*17)%canvas.width, (i*23)%canvas.height, 1, 1); }
 
-            
+            // Dibujar Obstáculos
             obstacles.forEach(obs => {
                 ctx.save();
                 ctx.translate(obs.x, obs.y);
@@ -148,7 +163,7 @@
                 ctx.restore();
             });
 
-            
+            // Dibujar Tierra
             ctx.save();
             if (images.earth.loaded) {
                 ctx.shadowBlur = 15; ctx.shadowColor = "#00d4ff";
@@ -159,15 +174,30 @@
             }
             ctx.restore();
 
-            // Points UI
+            // Interfaz de puntos
             ctx.fillStyle = "#00d4ff";
             ctx.font = "bold 18px Inter";
             ctx.textAlign = "left";
             ctx.fillText("POINTS: " + score, 20, 40);
+
+            
+            if (!gameActive) {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = "#00d4ff";
+                ctx.textAlign = "center";
+                ctx.font = "bold 24px Inter";
+                ctx.fillText("CLICK ON CANVAS", canvas.width/2, canvas.height/2 - 20);
+                
+                ctx.font = "16px Inter";
+                ctx.fillStyle = "white";
+                ctx.fillText("TO INSERT COIN & START", canvas.width/2, canvas.height/2 + 20);
+            }
         }
 
         updateLeaderboard();
-        update();
+        draw();
     </script>
 </body>
 </html>
