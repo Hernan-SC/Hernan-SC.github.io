@@ -4,25 +4,54 @@
     <meta charset="UTF-8">
     <title>Planetary Defense | Hernán Salinas</title>
     <style>
-        body { margin: 0; background: #050510; color: white; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
-        canvas { display: block; background: radial-gradient(circle, #1b2735 0%, #050510 100%); margin: 10px auto; border: 2px solid #00d4ff; border-radius: 15px; cursor: crosshair; }
+        body { margin: 0; background: #0a0000; color: white; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
+        
+        /* Cambio de celeste a Burdeo Neón */
+        canvas { 
+            display: block; 
+            background: #000; 
+            margin: 10px auto; 
+            border: 2px solid #800020; /* Burdeo */
+            border-radius: 15px; 
+            cursor: crosshair;
+            box-shadow: 0 0 20px rgba(128, 0, 32, 0.5);
+        }
+
         .ui { max-width: 500px; margin: 0 auto; }
-        .leaderboard { background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 12px; margin-top: 10px; border: 1px solid rgba(0, 212, 255, 0.3); }
-        h1 { margin-top: 15px; color: #00d4ff; letter-spacing: 2px; }
-        .back-link { color: #00d4ff; text-decoration: none; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; padding: 10px; display: inline-block; }
-        .back-link:hover { opacity: 1; text-shadow: 0 0 10px #00d4ff; }
-        #highscores { line-height: 1.6; font-family: monospace; font-size: 1.1rem; }
+        
+        .leaderboard { 
+            background: rgba(128, 0, 32, 0.1); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-top: 10px; 
+            border: 1px solid rgba(128, 0, 32, 0.4); 
+        }
+
+        h1 { margin-top: 15px; color: #ff0033; letter-spacing: 4px; text-shadow: 0 0 15px #800020; }
+        
+        .back-link { 
+            color: #ff4d4d; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            opacity: 0.7; 
+            transition: 0.3s; 
+            padding: 10px; 
+            display: inline-block; 
+        }
+        .back-link:hover { opacity: 1; text-shadow: 0 0 10px #ff0000; }
+        
+        #highscores { line-height: 1.6; font-family: monospace; font-size: 1.1rem; color: #ff9999; }
     </style>
 </head>
 <body>
 
     <h1>PLANETARY DEFENSE</h1>
-    <p>Move Earth to dodge Comets and Giant Planets</p>
+    <p style="color: #666;">Move Earth to dodge Comets and Giant Planets</p>
     <canvas id="gameCanvas" width="500" height="600"></canvas>
 
     <div class="ui">
         <div class="leaderboard">
-            <strong>TOP 3 SURVIVORS</strong>
+            <strong style="color: #ff0033;">TOP 3 SURVIVORS</strong>
             <div id="highscores">Loading scores...</div>
         </div>
         <br>
@@ -48,8 +77,19 @@
         let player = { x: 250, y: 550, size: 22 };
         let obstacles = [];
         let score = 0;
-        let gameActive = false; // COMIENZA EN FALSE PARA EL "INSERT COIN"
+        let gameActive = false; 
         let lastTime = Date.now();
+
+        // --- SISTEMA DE ESTRELLAS ANIMADAS ---
+        let stars = [];
+        for(let i=0; i<80; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.2
+            });
+        }
 
         let highscores = JSON.parse(localStorage.getItem('astroScoresV2')) || [
             {name: "---", pts: 0}, {name: "---", pts: 0}, {name: "---", pts: 0}
@@ -63,18 +103,13 @@
 
         function saveScore(finalScore) {
             let userName = prompt("GAME OVER!\nScore: " + finalScore + "\n\nEnter your initials (3 letters):", "AAA");
-            
             if (!userName) userName = "UNK";
             userName = userName.substring(0, 3).toUpperCase();
-
             highscores.push({ name: userName, pts: finalScore });
             highscores.sort((a, b) => b.pts - a.pts);
             highscores = highscores.slice(0, 3);
-            
             localStorage.setItem('astroScoresV2', JSON.stringify(highscores));
             updateLeaderboard();
-            
-            // En lugar de reload(), reseteamos variables para que aparezca el "Insert Coin" de nuevo
             resetGame();
         }
 
@@ -82,10 +117,10 @@
             obstacles = [];
             score = 0;
             gameActive = false;
-            player = { x: 250, y: 300, size: 22 }; // Centrar jugador al inicio
+            player = { x: 250, y: 550, size: 22 }; 
+            draw(); 
         }
 
-        // --- CLICK PARA EMPEZAR ---
         canvas.addEventListener('mousedown', () => {
             if (!gameActive) {
                 gameActive = true;
@@ -95,7 +130,6 @@
         });
 
         canvas.addEventListener('mousemove', (e) => {
-            if (!gameActive) return;
             const rect = canvas.getBoundingClientRect();
             player.x = e.clientX - rect.left;
             player.y = e.clientY - rect.top;
@@ -107,19 +141,25 @@
                 x: Math.random() * canvas.width,
                 y: -60,
                 size: isPlanet ? 45 : 15,
-                speed: isPlanet ? 2 + Math.random() : 4 + Math.random() * 3,
+                speed: isPlanet ? 1.5 + Math.random() : 3 + Math.random() * 3,
                 type: isPlanet ? 'planet' : 'comet',
                 angle: 0,
-                rotSpeed: (Math.random() - 0.5) * 0.1
+                rotSpeed: (Math.random() - 0.5) * 0.05
             });
         }
 
         function update() {
             if (!gameActive) return;
 
+            // Update Stars (Background movement)
+            stars.forEach(star => {
+                star.y += star.speed;
+                if (star.y > canvas.height) star.y = 0;
+            });
+
             let now = Date.now();
-            if (now - lastTime >= 2000) { score += 2; lastTime = now; }
-            if (Math.random() < 0.07) createObstacle();
+            if (now - lastTime >= 1000) { score += 1; lastTime = now; }
+            if (Math.random() < 0.06) createObstacle();
 
             obstacles.forEach((obs, index) => {
                 obs.y += obs.speed;
@@ -129,9 +169,9 @@
                 let dy = player.y - obs.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < (player.size * 0.8) + (obs.size * 0.8)) {
+                if (distance < (player.size * 0.7) + (obs.size * 0.7)) {
                     gameActive = false;
-                    setTimeout(() => saveScore(score), 100); // Pequeño delay para ver el choque
+                    setTimeout(() => saveScore(score), 100);
                     return;
                 }
                 if (obs.y > canvas.height + 100) obstacles.splice(index, 1);
@@ -142,13 +182,19 @@
         }
 
         function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Fondo Negro Sólido
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Estrellas de fondo
-            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-            for(let i=0; i<30; i++) { ctx.fillRect((i*17)%canvas.width, (i*23)%canvas.height, 1, 1); }
+            // Estrellas en movimiento
+            ctx.fillStyle = "white";
+            stars.forEach(star => {
+                ctx.globalAlpha = star.speed; // Estrellas lentas son más tenues
+                ctx.fillRect(star.x, star.y, star.size, star.size);
+            });
+            ctx.globalAlpha = 1.0;
 
-            // Dibujar Obstáculos
+            // Obstáculos
             obstacles.forEach(obs => {
                 ctx.save();
                 ctx.translate(obs.x, obs.y);
@@ -163,36 +209,39 @@
                 ctx.restore();
             });
 
-            // Dibujar Tierra
+            // Jugador (La Tierra) con brillo neón burdeo
             ctx.save();
             if (images.earth.loaded) {
-                ctx.shadowBlur = 15; ctx.shadowColor = "#00d4ff";
+                ctx.shadowBlur = 20; 
+                ctx.shadowColor = "#ff0033"; // Resplandor Burdeo neón
                 ctx.drawImage(images.earth.obj, player.x - player.size, player.y - player.size, player.size*2, player.size*2);
             } else {
                 ctx.beginPath(); ctx.arc(player.x, player.y, player.size, 0, Math.PI*2);
-                ctx.fillStyle = images.earth.color; ctx.fill();
+                ctx.fillStyle = "#ff0033"; ctx.fill();
             }
             ctx.restore();
 
-            // Interfaz de puntos
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "bold 18px Inter";
+            // Puntos UI
+            ctx.fillStyle = "#ff0033";
+            ctx.font = "bold 20px Inter";
             ctx.textAlign = "left";
-            ctx.fillText("POINTS: " + score, 20, 40);
+            ctx.fillText("SCORE: " + score, 20, 40);
 
-            
+            // Pantalla de inicio (Overlay)
             if (!gameActive) {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+                ctx.fillStyle = "rgba(10, 0, 0, 0.8)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                ctx.fillStyle = "#00d4ff";
+                ctx.fillStyle = "#ff0033";
                 ctx.textAlign = "center";
-                ctx.font = "bold 24px Inter";
-                ctx.fillText("CLICK ON CANVAS", canvas.width/2, canvas.height/2 - 20);
+                ctx.font = "bold 28px Inter";
+                ctx.shadowBlur = 10; ctx.shadowColor = "#ff0033";
+                ctx.fillText("INSERT COIN", canvas.width/2, canvas.height/2 - 20);
                 
+                ctx.shadowBlur = 0;
                 ctx.font = "16px Inter";
                 ctx.fillStyle = "white";
-                ctx.fillText("TO INSERT COIN & START", canvas.width/2, canvas.height/2 + 20);
+                ctx.fillText("CLICK TO START DEFENSE", canvas.width/2, canvas.height/2 + 20);
             }
         }
 
