@@ -6,7 +6,7 @@
     <style>
         body { margin: 0; background: #050005; color: white; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
         
-        /* Borde Morado Neón */
+      
         canvas { 
             display: block; 
             background: #000; 
@@ -80,7 +80,7 @@
         let gameActive = false; 
         let lastTime = Date.now();
 
-        // Estrellas animadas
+     
         let stars = [];
         for(let i=0; i<80; i++) {
             stars.push({
@@ -206,7 +206,7 @@
                 ctx.restore();
             });
 
-            // JUGADOR CON NEÓN CELESTE (Original)
+            
             ctx.save();
             if (images.earth.loaded) {
                 ctx.shadowBlur = 20; 
@@ -218,7 +218,6 @@
             }
             ctx.restore();
 
-            // Puntos con color Morado
             ctx.fillStyle = "#bc13fe";
             ctx.font = "bold 20px Inter";
             ctx.textAlign = "left";
