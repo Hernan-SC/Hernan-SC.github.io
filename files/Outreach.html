@@ -57,7 +57,6 @@
 
         h2:first-of-type { margin-top: 0; }
 
-        /* Estilo de Listas e Info */
         .info-section {
             background: var(--dark-card);
             padding: 40px;
@@ -79,7 +78,7 @@
         }
 
         .custom-list li::before {
-            content: '\f058'; /* FontAwesome check circle */
+            content: '\f058'; 
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -87,7 +86,6 @@
             color: var(--accent);
         }
 
-        /* Miembros (Solo Lista) */
         .member-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -104,9 +102,8 @@
         }
 
         .member-item strong { display: block; color: white; }
-        .member-item span { color: var(--text-gray); font-size: 0.85rem; }
+        .member-item span { color: var(--text-gray); font-size: 0.85rem; text-transform: capitalize; }
 
-        /* --- GALERÍA DE FOTOS (RESTAURADA) --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -198,20 +195,24 @@
             <h2>Team Members</h2>
             <div class="member-list">
                 <div class="member-item">
+                    <strong>René Ramirez</strong>
+                    <span>Representative</span>
+                </div>
+                <div class="member-item">
+                    <strong>Gabriel Farias</strong>
+                    <span>Astrophotographer</span>
+                </div>
+                <div class="member-item">
+                    <strong>Axel Andrade</strong>
+                    <span>Astrophotographer</span>
+                </div>
+                <div class="member-item">
+                    <strong>Sofia Ramirez</strong>
+                    <span>Science Communicator</span>
+                </div>
+                <div class="member-item">
                     <strong>Hernán Salinas</strong>
-                    <span>Astrophysics Undergraduate</span>
-                </div>
-                <div class="member-item">
-                    <strong>Member Name</strong>
-                    <span>Role / Description</span>
-                </div>
-                <div class="member-item">
-                    <strong>Member Name</strong>
-                    <span>Role / Description</span>
-                </div>
-                <div class="member-item">
-                    <strong>Member Name</strong>
-                    <span>Role / Description</span>
+                    <span>Astronomer</span>
                 </div>
             </div>
         </section>
@@ -221,7 +222,7 @@
             <div class="gallery-grid">
                 
                 <div class="gallery-item">
-                    <img src="../images/astroaww/foster.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Observatorio+Foster'">
+                    <img src="../images/astroaww/foster.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Manuel+Foster+Observatory'">
                     <div class="gallery-caption">Collaboration with the Manuel Foster Observatory</div>
                 </div>
                 
@@ -232,12 +233,12 @@
                 
                 <div class="gallery-item">
                     <img src="../images/astroaww/manz1.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Event+Activity'">
-                    <div class="gallery-caption">Educational Activities: El Universo en tus Manos</div>
+                    <div class="gallery-caption">Educational Workshop: "El Universo en tus Manos"</div>
                 </div>
                 
                 <div class="gallery-item">
                     <img src="../images/astroaww/sol.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Solar+Imaging'">
-                    <div class="gallery-caption">Solar observation and imaging workshop</div>
+                    <div class="gallery-caption">Solar Observation and H-alpha Imaging</div>
                 </div>
                 
                 <div class="gallery-item">
