@@ -12,6 +12,7 @@
             --accent: #ff9f43;
             --dark-card: #1e1e26;
             --text-gray: #a0a0a0;
+            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
         body {
@@ -26,7 +27,7 @@
             width: 100%;
             min-height: 450px; 
             background: linear-gradient(to bottom, rgba(0,0,0,0.4), #0d0d12), 
-                        url('../images/astroaww/Milky_Way.png'); 
+                        url('../images/astroaww/sol_Halpha.jpeg'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -46,15 +47,11 @@
 
         .main-logo {
             width: 100%;
-            max-width: 380px; /* Un poco más compacto */
+            max-width: 380px;
             height: auto;
             filter: drop-shadow(0 0 20px rgba(0,0,0,0.6));
-            margin-bottom: -15px; /* Margen negativo para acercar el texto */
+            margin-bottom: -15px;
             transition: transform 0.3s ease;
-        }
-        
-        .main-logo:hover {
-            transform: scale(1.02);
         }
 
         h1 {
@@ -90,27 +87,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .custom-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .custom-list li {
-            margin-bottom: 20px;
-            padding-left: 35px;
-            position: relative;
-        }
-
-        .custom-list li::before {
-            content: '\f058'; 
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
+        /* Miembros */
         .member-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -123,17 +100,12 @@
             padding: 20px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-        }
-        
-        .member-item:hover {
-            border-color: var(--accent);
-            background: rgba(255, 159, 67, 0.05);
         }
 
         .member-item strong { display: block; color: white; font-size: 1.1rem; }
         .member-item span { color: var(--text-gray); font-size: 0.85rem; }
 
+        /* Galería */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -146,18 +118,13 @@
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: 0.3s;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.6s ease;
         }
-
-        .gallery-item:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .gallery-item:hover img { transform: scale(1.1); }
 
         .gallery-caption {
             position: absolute;
@@ -165,13 +132,50 @@
             background: linear-gradient(transparent, rgba(0,0,0,0.95));
             padding: 20px;
             font-size: 0.9rem;
-            color: white;
             opacity: 0;
             transition: 0.4s;
         }
 
         .gallery-item:hover .gallery-caption { opacity: 1; }
 
+        /* SECCIÓN DE CONTACTO NUEVA */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .fa-instagram { color: #e1306c; }
+        .fa-envelope { color: var(--accent); }
+
+        .contact-card h4 { margin: 10px 0 5px 0; font-size: 1.2rem; }
+        .contact-card p { color: var(--text-gray); font-size: 0.9rem; margin: 0; }
+
+        /* Navegación */
         .back-nav {
             padding: 20px;
             position: absolute;
@@ -188,11 +192,7 @@
             padding: 12px 24px;
             border-radius: 50px;
             backdrop-filter: blur(10px);
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
         }
-
-        .back-nav a:hover { background: var(--accent); border-color: var(--accent); }
 
         footer { text-align: center; padding: 60px; opacity: 0.5; font-size: 0.9rem; border-top: 1px solid #222; }
     </style>
@@ -214,76 +214,65 @@
         
         <section class="info-section">
             <h2>Group Objectives</h2>
-            <ul class="custom-list">
-                <li><strong>Scientific Communication:</strong> Bridge the gap between academia and the general public through engaging astronomical content.</li>
-                <li><strong>Inclusion:</strong> Bring astronomy to schools and communities with limited access to scientific resources.</li>
-                <li><strong>Public Observations:</strong> Organize stargazing events to share the wonders of the universe through telescopes.</li>
-                <li><strong>Collaboration:</strong> Work alongside institutions like the Manuel Foster Observatory to preserve astronomical heritage.</li>
-            </ul>
+            <p style="color: var(--text-gray); margin-bottom: 25px;">We are a group of astronomy enthusiasts dedicated to sharing the wonders of the cosmos with everyone.</p>
         </section>
 
         <section class="info-section">
             <h2>Team Members</h2>
             <div class="member-list">
-                <div class="member-item">
-                    <strong>René Ramirez</strong>
-                    <span>Representative</span>
-                </div>
-                <div class="member-item">
-                    <strong>Gabriel Farias</strong>
-                    <span>Astrophotographer</span>
-                </div>
-                <div class="member-item">
-                    <strong>Axel Andrade</strong>
-                    <span>Astrophotographer</span>
-                </div>
-                <div class="member-item">
-                    <strong>Sofia Ramirez</strong>
-                    <span>Science Communicator</span>
-                </div>
-                <div class="member-item">
-                    <strong>Hernán Salinas</strong>
-                    <span>Astronomer</span>
-                </div>
+                <div class="member-item"><strong>René Ramirez</strong><span>Representative</span></div>
+                <div class="member-item"><strong>Gabriel Farias</strong><span>Astrophotographer</span></div>
+                <div class="member-item"><strong>Axel Andrade</strong><span>Astrophotographer</span></div>
+                <div class="member-item"><strong>Sofia Ramirez</strong><span>Science Communicator</span></div>
+                <div class="member-item"><strong>Hernán Salinas</strong><span>Astronomer</span></div>
             </div>
         </section>
 
         <section class="info-section">
             <h2>Activity Gallery</h2>
             <div class="gallery-grid">
-                
                 <div class="gallery-item">
-                    <img src="../images/astroaww/foster.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Manuel+Foster+Observatory'">
-                    <div class="gallery-caption">Collaboration with the Manuel Foster Observatory</div>
+                    <img src="../images/astroaww/foster.jpeg" alt="Foster">
+                    <div class="gallery-caption">Collaboration with Manuel Foster Observatory</div>
                 </div>
-                
                 <div class="gallery-item">
-                    <img src="../images/astroaww/group_picture.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Group+Photo'">
-                    <div class="gallery-caption">"El Universo en tus Manos N°2" Event Team</div>
+                    <img src="../images/astroaww/group_picture.jpeg" alt="Group">
+                    <div class="gallery-caption">"El Universo en tus Manos" Team</div>
                 </div>
-                
                 <div class="gallery-item">
-                    <img src="../images/astroaww/manz1.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Event+Activity'">
-                    <div class="gallery-caption">"El Universo en tus Manos" Event Team</div>
+                    <img src="../images/astroaww/sol.jpeg" alt="Solar">
+                    <div class="gallery-caption">Solar Observation Sessions</div>
                 </div>
-                
                 <div class="gallery-item">
-                    <img src="../images/astroaww/sol.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=Solar+Imaging'">
-                    <div class="gallery-caption">Solar Observation and Imaging</div>
+                    <img src="../images/astroaww/niños_ast.jpeg" alt="Kids">
+                    <div class="gallery-caption">School Outreach Activities</div>
                 </div>
+            </div>
+        </section>
 
-                 <div class="gallery-item">
-                    <img src="../images/astroaww/niños_ast.jpeg" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=School+Outreach'">
-                    <div class="gallery-caption">Outreach Activities in local schools</div>
-                </div>
+        <section class="info-section">
+            <h2>Get in Touch</h2>
+            <p style="color: var(--text-gray); margin-bottom: 30px;">Follow our journey or send us a message to collaborate on outreach projects.</p>
+            
+            <div class="contact-grid">
+                <a href="https://www.instagram.com/astroamigos_wintata_wara" target="_blank" class="contact-card">
+                    <i class="fab fa-instagram"></i>
+                    <h4>Instagram</h4>
+                    <p>@astroamigos_wintata_wara</p>
+                </a>
 
+                <a href="astroamigos.ww@gmail.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Us</h4>
+                    <p>Contact for collaborations</p>
+                </a>
             </div>
         </section>
 
     </div>
 
     <footer>
-        &copy; 2026 Astroamigos Wintata Wara | Astrophysics PUC Chile
+        &copy; 2026 Astroamigos Wintata Wara
     </footer>
 
 </body>
