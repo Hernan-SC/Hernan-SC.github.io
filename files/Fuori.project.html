@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FU Orionis Chemistry | Hernán Salinas</title>
+    <title>FU Orionis Chemistry | Hernán Salinas Castro</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #1a2a3a;
-            --accent: #ff9f43; /* El naranja que elegimos */
+            --accent: #ff9f43; /* Naranja temático para FU Orionis */
             --text: #2d3436;
-            --bg-light: rgba(255, 255, 255, 0.96);
+            --bg-light: rgba(255, 255, 255, 0.98);
         }
 
         body {
@@ -23,141 +23,152 @@
                         url('images/back.png'); 
             background-attachment: fixed;
             background-size: cover;
-            background-position: center;
             line-height: 1.8;
         }
 
-        .container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
-
-        .project-header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
+        .nav-back {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
-        .project-header h1 { font-size: 3rem; margin-bottom: 10px; }
-        .project-header p { font-size: 1.2rem; opacity: 0.8; font-weight: 300; }
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-back a:hover { color: var(--accent); background: rgba(0,0,0,0.8); }
+
+        .container { max-width: 900px; margin: -50px auto 60px; padding: 0 20px; position: relative; }
+
+        .hero-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+            display: block;
+        }
 
         section {
             background: var(--bg-light);
             padding: 50px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        h3 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            border-left: 6px solid var(--accent);
-            padding-left: 20px;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
+        h1 { color: var(--primary); font-size: 2.2rem; margin-top: 20px; line-height: 1.2; }
+        h2 { color: var(--primary); font-size: 1.5rem; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
 
-        .project-image {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .tag-container {
+        .project-meta {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            margin-bottom: 20px;
         }
 
-        .tag {
-            background: rgba(255, 159, 67, 0.15);
+        .badge {
+            background: rgba(255, 159, 67, 0.1);
             color: #d35400;
             padding: 5px 15px;
-            border-radius: 50px;
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(255, 159, 67, 0.3);
+            border: 1px solid rgba(255, 159, 67, 0.2);
         }
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: 0.3s;
-            opacity: 0.8;
+        .science-fig {
+            margin: 35px 0;
+            text-align: center;
         }
 
-        .back-link:hover { opacity: 1; transform: translateX(-5px); }
+        .science-fig img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 12px;
+            font-style: italic;
+            padding: 0 20px;
+        }
+
+        .highlight-box {
+            background: #fff9f1;
+            border-left: 5px solid var(--accent);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
 
         ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
+        li { margin-bottom: 12px; }
 
         footer { text-align: center; color: white; padding: 40px; opacity: 0.7; font-size: 0.9rem; }
+
+        @media (max-width: 600px) { 
+            section { padding: 25px; } 
+            h1 { font-size: 1.8rem; }
+            .hero-image { height: 200px; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="nav-back">
+        <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Portfolio
-        </a>
-
-        <header class="project-header">
-            <h1>Chemistry of FU Orionis Objects</h1>
-            <p>Unveiling the molecular complexity of young stellar outbursts</p>
-        </header>
-
+        <img src="../images/Fu-ori/JWST-disk.png" alt="FU Orionis Accretion Disk" class="hero-image">
+        
         <section>
-            <img src="../images/Fu-ori/JWST-disk.png" alt="FU Orionis accretion" class="project-image" onerror="this.style.display='none'">
+            <h1>Chemistry of FU Orionis Objects</h1>
             
-            <div class="tag-container">
-                <span class="tag">Infrared Spectroscopy</span>
-                <span class="tag">Young Stellar Objects (YSOs)</span>
-                <span class="tag">Accretion Outbursts</span>
-                <span class="tag">Chemistry</span>
+            <div class="project-meta">
+                <span class="badge"><i class="fas fa-wave-square"></i> Infrared Spectroscopy</span>
+                <span class="badge"><i class="fas fa-sun"></i> YSOs</span>
+                <span class="badge"><i class="fas fa-bolt"></i> Accretion Outbursts</span>
+                <span class="badge"><i class="fas fa-atom"></i> Molecular Chemistry</span>
             </div>
 
-            <div class="content-grid">
-                <div>
-                    <h3>Project Overview</h3>
-                    <p>
-                        FU Orionis objects are young stars that experience dramatic increases in brightness due to sudden episodes of high-mass accretion from their surrounding disks. 
-                        This research focuses on investigating the <strong>chemical composition</strong> of these objects during these violent events.
-                    </p>
-                    <p>
-                        By analyzing infrared observations, we can trace how these outbursts impact the molecular gas and dust in the inner regions of planet-forming disks, 
-                        altering the environment where future planetary systems will emerge.
-                    </p>
-                </div>
+            <p>
+                FU Orionis objects (FUors) are young stars that experience dramatic increases in brightness due to sudden episodes of high-mass accretion from their surrounding disks. This research investigates the <strong>molecular complexity</strong> triggered by these violent events.
+            </p>
 
-                <div>
-                    <h3>Key Objectives</h3>
-                    <ul>
-                        <li>Identify molecular species (CO, H2O, OH) in the circumstellar environment of FUors.</li>
-                        <li>Characterize the physical conditions (temperature and density) of the gas during accretion outbursts.</li>
-                        <li>Compare chemical signatures across different types of young stellar outbursts to understand their evolution.</li>
-                        <li>Understand the impact of high luminosity events on the chemical survival of molecules.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3>Methodology</h3>
-                    <p>
-                        We utilize high-resolution <strong>Infrared Spectroscopy</strong> data from ground-based and space telescopes. Through radiative transfer modeling and spectral analysis, 
-                        we extract information about the excitation temperatures and column densities of the detected molecules.
-                    </p>
-                </div>
+            <div class="highlight-box">
+                By analyzing infrared observations, we trace how these outbursts impact the molecular gas and dust in the inner regions of planet-forming disks, altering the chemical environment where future planetary systems emerge.
             </div>
+
+            <h2>Key Objectives</h2>
+            <ul>
+                <li><strong>Molecular Identification:</strong> Detect species such as CO, H₂O, and OH in the circumstellar environment.</li>
+                <li><strong>Physical Characterization:</strong> Determine the temperature and density of the gas during accretion outbursts.</li>
+                <li><strong>Comparative Analysis:</strong> Understand chemical signatures across different types of young stellar outbursts.</li>
+                <li><strong>Molecular Survival:</strong> Assess the impact of high-luminosity events on the destruction and formation of molecules.</li>
+            </ul>
+
+            <h2>Methodology</h2>
+            <p>
+                The project utilizes high-resolution <strong>Infrared Spectroscopy</strong> data from major ground-based and space-borne observatories. We combine these data with radiative transfer modeling to extract excitation temperatures and column densities of the detected species.
+            </p>
+
+            <div class="science-fig">
+                <img src="../images/Fu-ori/JWST-disk.png" alt="Spectroscopic Analysis">
+                <div class="caption">Figure 1: Numerical simulation or spectroscopic data representing the inner disk region of an FUor object during an outburst.</div>
+            </div>
+
         </section>
     </div>
 
